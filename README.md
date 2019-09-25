@@ -15,6 +15,11 @@ npm run serve
 npm run build
 ```
 
+### 打包分析
+```
+npm run analyz
+```
+
 ### Run your tests
 ```
 npm run test
