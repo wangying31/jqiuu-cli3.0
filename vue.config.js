@@ -131,12 +131,12 @@ module.exports = {
       //   })
       // )
     }
-    config.externals = {
-      vue: 'Vue',
-      'vue-router': 'VueRouter',
-      vuex: 'Vuex',
-      axios: 'axios'
-    }
+    // config.externals = {
+    //   vue: 'Vue',
+    //   'vue-router': 'VueRouter',
+    //   vuex: 'Vuex',
+    //   axios: 'axios'
+    // }
 
     // if (has_sprite) {
     //   plugins.push(

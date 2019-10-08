@@ -37,6 +37,10 @@ const routes = [{
   component: () => import(/* webpackChunkName: "photo" */ '@views/photo.vue'),
   meta: { auth: false }
 }, {
+  path: '/website',
+  component: () => import(/* webpackChunkName: "website" */ '@views/website.vue'),
+  meta: { auth: false }
+}, {
   path: '/login',
   component: () => import(/* webpackChunkName: "login" */ '@views/login.vue')
 }, {
