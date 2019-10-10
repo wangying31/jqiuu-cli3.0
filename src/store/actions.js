@@ -567,3 +567,47 @@ export const articleStatus = ({ commit }, data) => {
     }
   })
 }
+
+export const websiteList = ({ commit }, data) => {
+  api.getWebsitesList().then(response => {
+    commit(types.WEBSITES_LIST, {
+      websites: response.data.websites
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.WEBSITES_LIST)
+    }
+  })
+}
+
+export const websitebrowseNum = ({ commit }, data) => {
+  api.websitebrowseNum(data.id).then(response => {
+    commit(types.WEBSITES_BROWSE_NUM, {
+      wid: response.data.wid,
+      browseNum: response.data.browseNum
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '点赞失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const websiteLikeNum = ({ commit }, data) => {
+  api.websiteLikeNum(data.id).then(response => {
+    commit(types.WEBSITES_LIKE_NUM, {
+      wid: response.data.wid,
+      likeNum: response.data.likeNum
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '点赞失败',
+        type: 'danger'
+      })
+    }
+  })
+}

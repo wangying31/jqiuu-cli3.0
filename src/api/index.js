@@ -92,5 +92,14 @@ export default {
   },
   photoLike: function (data) {
     return axios.put('/album/' + data + '/photoLike', {}, config())
+  },
+  getWebsitesList: function () {
+    return axios.get('/websites/getWebsitesList/', config())
+  },
+  websitebrowseNum: function (data) {
+    return axios.put('/websites/' + data + '/websitebrowseNum', {}, config())
+  },
+  websiteLikeNum: function (data) {
+    return axios.put('/websites/' + data + '/websiteLikeNum', {}, config())
   }
 }

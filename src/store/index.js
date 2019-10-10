@@ -15,6 +15,7 @@ import articleTogether from './modules/articleTogether'
 import comment from './modules/comment'
 import photo from './modules/photo'
 import photoUser from './modules/photoUser'
+import websites from './modules/websites'
 
 Vue.use(Vuex)
 
@@ -35,7 +36,8 @@ export default new Vuex.Store({
     articleTogether,
     comment,
     photo,
-    photoUser
+    photoUser,
+    websites
   },
   strict: debug
 })

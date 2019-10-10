@@ -1,13 +1,13 @@
 <template>
   <div class="container pad_t75">
-      <div class="d_cont" v-for="item in list">
+      <div class="d_cont" v-for="(item, index) in getWebList" :key="index">
         <p class="d_type">{{item.type}}</p>
         <div class="d_item" v-for="item1 in item.data" :key="item1._id">
-          <div class="d_icon" @click="goLink(item1.link)">
+          <div class="d_icon" @click="goLink(item1.link, item1._id)">
             <img :src="item1.icon" alt=""> 
           </div>
           <div class="d_right">
-            <p class="d_title" @click="goLink(item1.link)">{{item1.title}}</p>
+            <p class="d_title" @click="goLink(item1.link, item1._id)">{{item1.title}}</p>
             <p class="d_info">{{item1.info}}</p>
             <p class="d_num"><span class="hide_mobile" title="点赞" @click="addLikeNum(item1._id)"><i class="iconfont icon-like"></i><em>{{item1.likeNum}}</em></span><span class="hide_mobile" title="访问量"><i class="iconfont icon-browse"></i><em>{{item1.browseNum}}</em></span></p>
           </div>
@@ -17,38 +17,40 @@
   </div>
 </template>
 <script>
+import { mapGetters ,mapActions } from 'vuex'
+
 export default {
   data() {
     return {
       list: [
-        {'type': '类型1', data: [
-          {'_id': '1', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '2', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '3', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '4', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '5', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '6', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型1网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-        ]},
-        {'type': '类型2', data: [
-          {'_id': '7', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '8', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '9', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '10', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '11', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-          {'_id': '12', 'icon': 'https://www.iguoguo.net/wp-content/uploads/2018/01/guoguo.jpg', 'title': '类型2网址1', 'info': '这个网址不错的', 'link': '', 'likeNum': '99', 'browseNum': '31'},
-        ]}
+        
       ]
     }
   },
+  computed: {
+      ...mapGetters({
+        getWebList: 'getWebList'
+      }),
+      ...mapActions({
+        websiteList: 'websiteList',
+        websitebrowseNum: 'websitebrowseNum',
+        websiteLikeNum: 'websiteLikeNum'
+      })
+    },
   created() {
     
   },
+  mounted() {
+    this.$store.dispatch('websiteList');
+    console.log(this.getWebList);
+  },
   methods: {
-    goLink(link) {
-      console.log('1111');
+    goLink(link, id) {
+      this.$store.dispatch('websitebrowseNum', {id: id});
+      window.open(link, '_blank');
     },
     addLikeNum(id) {
-      console.log('22');
+      this.$store.dispatch('websiteLikeNum', {id: id});
     }
   },
 }
@@ -94,6 +96,7 @@ export default {
   }
   .d_icon img {
     border-radius: 50%;
+    width: 100%;
   }
   .d_right {
     width: 73%;
