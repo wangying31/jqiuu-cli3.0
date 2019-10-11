@@ -26,14 +26,16 @@ export const getPhotoUser = state => state.photoUser
 export const getWebList = state => {
   let list = state.websites.list
   let tempList = []
-  tempList.push({ type: list[0].type, data: [list[0]] })
-  for (let index = 1; index < list.length; index++) {
-    let tempType = tempList.map(item => item.type)
-    let t = tempType.indexOf(list[index].type)
-    if (t > -1) {
-      tempList[t].data.push(list[index])
-    } else {
-      tempList.push({ type: list[index].type, data: [list[index]] })
+  if (list.length) {
+    tempList.push({ type: list[0].type, data: [list[0]] })
+    for (let index = 1; index < list.length; index++) {
+      let tempType = tempList.map(item => item.type)
+      let t = tempType.indexOf(list[index].type)
+      if (t > -1) {
+        tempList[t].data.push(list[index])
+      } else {
+        tempList.push({ type: list[index].type, data: [list[index]] })
+      }
     }
   }
   console.log(tempList)
