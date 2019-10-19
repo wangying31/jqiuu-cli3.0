@@ -41,3 +41,4 @@ export const getWebList = state => {
   console.log(tempList)
   return tempList
 }
+export const getTypes = state => state.types.typess

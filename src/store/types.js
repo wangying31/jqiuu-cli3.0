@@ -53,3 +53,7 @@ export const WEBSITES_LIST = 'WEBSITES_LIST'
 export const ADD_WEBSITES = 'ADD_WEBSITES'
 export const WEBSITES_BROWSE_NUM = 'WEBSITES_BROWSE_NUM'
 export const WEBSITES_LIKE_NUM = 'WEBSITES_LIKE_NUM'
+export const WEBSITE_ADD = 'WEBSITE_ADD'
+
+export const TYPESS = 'TYPESS'
+export const NEW_TYPES = 'NEW_TYPES'

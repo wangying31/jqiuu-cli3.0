@@ -1,4 +1,4 @@
-import {TAGS, NEW_TAG} from '../types'
+import { TAGS, NEW_TAG } from '../types'
 
 const state = {
   tags: []

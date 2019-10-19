@@ -9,7 +9,7 @@ function config () {
     baseURL: ROOT
   }
   if (localStorage.getItem('user') && !base.headers) {
-    base.headers = {Authorization: 'Bearer ' + localStorage.getItem('user').replace(/(^")|("$)/g, '')}
+    base.headers = { Authorization: 'Bearer ' + localStorage.getItem('user').replace(/(^")|("$)/g, '') }
   }
   return base
 }
@@ -101,5 +101,20 @@ export default {
   },
   websiteLikeNum: function (data) {
     return axios.put('/websites/' + data + '/websiteLikeNum', {}, config())
+  },
+  typess: function (data) {
+    return axios.get('/websites/types', config())
+  },
+  addWebsit: function (data) {
+    return axios.post('/websites/addWebsites', data, config())
+  },
+  findById: function (data) {
+    return axios.put('/websites/' + data + '/findById', {}, config())
+  },
+  editWebsites: function (data) {
+    return axios.put('/websites/' + data + '/editWebsites', {}, config())
+  },
+  delWebsites: function (data) {
+    return axios.delete('/websites/' + data, config())
   }
 }

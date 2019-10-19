@@ -194,9 +194,7 @@ export const articleCollect = ({ commit, state }, data) => {
 
 export const addArticle = ({ commit }, data) => {
   api.addArticle(data).then(response => {
-    commit(types.ARTICLE_PAGE, {
-      page: response.data
-    })
+    commit(types.ARTICLE_PAGE, {})
     showMsg({ commit }, {
       content: '提交成功',
       type: 'info'
@@ -606,6 +604,41 @@ export const websiteLikeNum = ({ commit }, data) => {
     if (error.response) {
       showMsg({ commit }, {
         content: error.response.data.errorMsg || '点赞失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const typess = ({ commit }) => {
+  api.typess().then(response => {
+    commit(types.TYPESS, {
+      typess: response.data.types
+    })
+  }).catch(error => {
+    if (error.response) {
+      commit(types.TYPESS)
+    }
+  })
+}
+
+export const newTypes = ({ commit }, data) => {
+  commit(types.NEW_TYPES, data)
+}
+
+export const addWebsit = ({ commit }, data) => {
+  api.addWebsit(data).then(response => {
+    commit(types.WEBSITE_ADD, {
+      page: response.data
+    })
+    showMsg({ commit }, {
+      content: '提交成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '提交失败',
         type: 'danger'
       })
     }

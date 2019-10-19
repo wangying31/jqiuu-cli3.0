@@ -130,13 +130,14 @@ module.exports = {
       //     format
       //   })
       // )
+      // cdn
+      config.externals = {
+        vue: 'Vue',
+        'vue-router': 'VueRouter',
+        vuex: 'Vuex',
+        axios: 'axios'
+      }
     }
-    // config.externals = {
-    //   vue: 'Vue',
-    //   'vue-router': 'VueRouter',
-    //   vuex: 'Vuex',
-    //   axios: 'axios'
-    // }
 
     // if (has_sprite) {
     //   plugins.push(
@@ -210,7 +211,6 @@ module.exports = {
       .set('@views', resolve('src/views'))
       .set('@router', resolve('src/router'))
       .set('@store', resolve('src/store'))
-      .set('@layouts', resolve('src/layouts'))
       .set('@static', resolve('src/static'))
 
     // 压缩图片

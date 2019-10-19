@@ -16,6 +16,7 @@ import comment from './modules/comment'
 import photo from './modules/photo'
 import photoUser from './modules/photoUser'
 import websites from './modules/websites'
+import types from './modules/types'
 
 Vue.use(Vuex)
 
@@ -37,7 +38,8 @@ export default new Vuex.Store({
     comment,
     photo,
     photoUser,
-    websites
+    websites,
+    types
   },
   strict: debug
 })

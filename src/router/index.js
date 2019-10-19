@@ -65,6 +65,12 @@ const routes = [{
       path: 'friend',
       name: 'setFriend',
       component: () => import(/* webpackChunkName: "friend" */ '@components/set/friend.vue')
+    },
+    {
+      path: 'websiteManage/:tp',
+      name: 'websiteManage',
+      props: true,
+      component: () => import(/* webpackChunkName: "websiteManage" */ '@components/set/websiteManage.vue')
     }
   ]
 }, {
