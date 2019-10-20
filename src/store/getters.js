@@ -42,3 +42,5 @@ export const getWebList = state => {
   return tempList
 }
 export const getTypes = state => state.types.typess
+
+export const getWebsiteOne = state => state.websites.listOne

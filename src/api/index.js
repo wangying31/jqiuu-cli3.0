@@ -108,11 +108,11 @@ export default {
   addWebsit: function (data) {
     return axios.post('/websites/addWebsites', data, config())
   },
-  findById: function (data) {
+  findByIdWebsite: function (data) {
     return axios.put('/websites/' + data + '/findById', {}, config())
   },
   editWebsites: function (data) {
-    return axios.put('/websites/' + data + '/editWebsites', {}, config())
+    return axios.post('/websites/editWebsites', data, config())
   },
   delWebsites: function (data) {
     return axios.delete('/websites/' + data, config())

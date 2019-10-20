@@ -8,7 +8,14 @@
           </div>
           <div class="panel_body">
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-8" v-if="opType=='1' || opType=='2'">
+                <div class="set_form clearfix" v-if="opType=='2'">
+                  <div class="tit">网址ID：</div>
+                  <div class="inp"><input type="text" class="form-control" v-model.trim="websiteId"></div>
+                  &nbsp;&nbsp;
+                  <button class="btn btn-info" @click="findWebsite">查询</button>
+                </div>
+                <hr v-if="opType=='2'">
                 <div class="set_form clearfix">
                   <div class="tit">标题：</div>
                   <div class="inp"><input type="text" class="form-control" v-model.trim="website.title"></div>
@@ -36,6 +43,12 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-8" v-else>
+                <div class="set_form clearfix">
+                  <div class="tit">网址ID：</div>
+                  <div class="inp"><input type="text" class="form-control" v-model.trim="websiteId"></div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="panel_foot set_sub">
@@ -52,6 +65,8 @@ export default {
     data() {
       return {
         title: '新增网址',
+        opType: '1',
+        websiteId: '',
         website:{
           title: '',
           icon: '',
@@ -73,17 +88,31 @@ export default {
     },
     computed : {
         ...mapGetters({
-            getTypes : 'getTypes'
+            getTypes : 'getTypes',
+            getWebsiteOne : 'getWebsiteOne'
         }),
         ...mapActions({
             typess: 'typess',
             newTypes: 'newTypes',
-            addWebsit: 'addWebsit'
+            addWebsit: 'addWebsit',
+            editWebsites: 'editWebsites',
+            delWebsites: 'delWebsites',
+            findByIdWebsite: 'findByIdWebsite'
         })
     },
     watch: {
-      'tp': function(newVal, oldVal) {
+      tp (newVal, oldVal) {
+        debugger
         this.title = newVal === 'add' ? '新增网址' : newVal === 'update' ? '修改网址' : '删除网址'
+        this.opType = newVal === 'add' ? '1' : newVal === 'update' ? '2' : '3'
+      },
+      getWebsiteOne () {
+        let { title, icon, info, type, link } = this.getWebsiteOne
+        this.website.title = title
+        this.website.icon = icon
+        this.website.info = info
+        this.website.type = type
+        this.website.link = link
       }
     },
     created() {
@@ -109,8 +138,25 @@ export default {
         }
       },
       update() {
+        switch (this.opType) {
+          case '1':
+            this.$store.dispatch('addWebsit', this.website)
+            break;
+          case '2':
+            this.website['wid'] = this.websiteId
+            this.$store.dispatch('editWebsites', this.website)
+            break;
+          case '3':
+            this.$store.dispatch('delWebsites', this.websiteId)
+            break;
         
-        this.$store.dispatch('addWebsit', this.website)
+          default:
+            break;
+        }
+        
+      },
+      findWebsite() {
+        this.$store.dispatch('findByIdWebsite', this.websiteId)
       }
     },
 }

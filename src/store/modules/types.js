@@ -1,4 +1,4 @@
-import { TYPESS, NEW_TYPES, WEBSITE_ADD } from '../types'
+import { TYPESS, NEW_TYPES } from '../types'
 
 const state = {
   typess: []
@@ -10,8 +10,6 @@ const mutations = {
   },
   [NEW_TYPES] (state, data) {
     state.typess.push(data)
-  },
-  [WEBSITE_ADD] (state, data) {
   }
 }
 

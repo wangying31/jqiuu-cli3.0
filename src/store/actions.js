@@ -644,3 +644,56 @@ export const addWebsit = ({ commit }, data) => {
     }
   })
 }
+
+export const editWebsites = ({ commit }, data) => {
+  api.editWebsites(data).then(response => {
+    commit(types.WEBSITE_UPDATE, {
+      page: response.data
+    })
+    showMsg({ commit }, {
+      content: '修改成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '修改失败',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const findByIdWebsite = ({ commit }, data) => {
+  api.findByIdWebsite(data).then(response => {
+    commit(types.WEBSITE_FINDBYID, {
+      list: response.data.websites
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '找不到该条数据',
+        type: 'danger'
+      })
+    }
+  })
+}
+
+export const delWebsites = ({ commit }, data) => {
+  api.delWebsites(data).then(response => {
+    commit(types.WEBSITE_DELETE, {
+      deleted: response.data.success
+    })
+    showMsg({ commit }, {
+      content: '删除成功',
+      type: 'info'
+    })
+  }).catch(error => {
+    if (error.response) {
+      showMsg({ commit }, {
+        content: error.response.data.errorMsg || '删除失败',
+        type: 'danger'
+      })
+    }
+  })
+}

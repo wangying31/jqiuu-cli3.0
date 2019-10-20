@@ -1,7 +1,8 @@
-import { WEBSITES_LIST, WEBSITES_BROWSE_NUM, WEBSITES_LIKE_NUM, ADD_WEBSITES } from '../types'
+import { WEBSITES_LIST, WEBSITES_BROWSE_NUM, WEBSITES_LIKE_NUM, WEBSITE_ADD, WEBSITE_UPDATE, WEBSITE_FINDBYID, WEBSITE_DELETE } from '../types'
 
 const state = {
-  list: []
+  list: [],
+  listOne: {}
 }
 
 const mutations = {
@@ -24,8 +25,15 @@ const mutations = {
       }
     })
   },
-  [ADD_WEBSITES] (state, data) {
-    state.list.push(data.websites)
+  [WEBSITE_ADD] (state, data) {
+  },
+  [WEBSITE_UPDATE] (state, data) {
+    state.list = data.websites
+  },
+  [WEBSITE_FINDBYID] (state, data) {
+    state.listOne = data.list
+  },
+  [WEBSITE_DELETE] (state, data) {
   }
 }
 
